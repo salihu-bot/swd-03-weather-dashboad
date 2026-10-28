@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A calm, clear look at the weather now and in the week ahead."
+    />
+    <meta name="theme-color" content="#111827" />
+    <title>Weatherly — Your day, in the forecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Weatherly home">
+          <span class="brand-mark" aria-hidden="true">☀</span>
+          <span>weatherly<span class="brand-period">.</span></span>
+        </a>
+
+        <form class="search-form" id="search-form" role="search">
+          <label class="sr-only" for="city-search">Search for a city</label>
+          <svg
+            class="search-icon"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <circle cx="10.8" cy="10.8" r="6.8" />
+            <path d="m16 16 4.2 4.2" />
+          </svg>
+          <input
+            id="city-search"
+            name="city"
+            type="search"
+            placeholder="Search a city..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit">Search</button>
+        </form>
+
+        <div class="topbar-note">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span>Live weather</span>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <div class="main-column">
+          <section class="welcome-row" aria-label="Dashboard date">
+            <div>
+              <p class="eyebrow">YOUR PERSONAL FORECAST</p>
+              <h1>Good afternoon<span class="heading-period">.</span></h1>
+            </div>
+            <p class="today-label" id="today-label"></p>
+          </section>
+
+          <div
+            class="status-message"
+            id="status-message"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+          <div
+            class="status-message status-error"
+            id="error-message"
+            role="alert"
+            hidden
+          ></div>
+
+          <section class="current-card glass-card" id="current-weather" aria-label="Current weather">
+            <div class="hero-glow" aria-hidden="true"></div>
+            <div class="current-topline">
+              <div class="location">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M19 10.2c0 5-7 11-7 11s-7-6-7-11a7 7 0 1 1 14 0Z"
+                  />
+                  <circle cx="12" cy="10" r="2.2" />
+                </svg>
+                <span id="current-location">Seattle, United States</span>
+              </div>
+              <button
+                class="icon-button favorite-toggle"
+                id="favorite-toggle"
+                type="button"
+                aria-label="Add Seattle to favourites"
+                aria-pressed="false"
+                title="Add to favourites"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path
+                    d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div class="hero-content">
+              <div class="temperature-block">
+                <p class="condition-label" id="current-condition">Partly cloudy</p>
+                <div class="temperature" id="current-temperature">18<span>°</span></div>
+                <p class="feels-like" id="feels-like">Feels like 17°</p>
+              </div>
+              <div class="weather-illustration" aria-hidden="true">
+                <span id="current-icon">🌤️</span>
+              </div>
+            </div>
+
+            <div class="hero-divider"></div>
+            <div class="weather-meta">
+              <div class="meta-item">
+                <span class="meta-icon wind-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M3 8h12a2.5 2.5 0 1 0-2.5-2.5M3 12h16a2.5 2.5 0 1 1-2.5 2.5M3 16h8" />
+                  </svg>
+                </span>
+                <span class="meta-copy">
+                  <span class="meta-label">WIND</span>
+                  <strong id="wind-speed">12 km/h</strong>
+                </span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-icon time-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="8.5" />
+                    <path d="M12 7v5l3.2 2" />
+                  </svg>
+                </span>
+                <span class="meta-copy">
+                  <span class="meta-label">LOCAL TIME</span>
+                  <strong id="local-time">--:--</strong>
+                </span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-icon humidity-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3s6 6.5 6 11a6 6 0 1 1-12 0c0-4.5 6-11 6-11Z" />
+                    <path d="M9 15a3 3 0 0 0 3 3" />
+                  </svg>
+                </span>
+                <span class="meta-copy">
+                  <span class="meta-label">HUMIDITY</span>
+                  <strong id="humidity">64%</strong>
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <section class="forecast-section" aria-labelledby="forecast-heading">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">PLAN AHEAD</p>
+                <h2 id="forecast-heading">7-day forecast</h2>
+              </div>
+              <span class="forecast-caption">Next 7 days</span>
+            </div>
+            <div class="forecast-grid" id="forecast-grid"></div>
+          </section>
+        </div>
+
+        <aside class="sidebar">
+          <section class="favorites-card glass-card" aria-labelledby="favorites-heading">
+            <div class="section-heading sidebar-heading">
+              <div>
+                <p class="eyebrow">YOUR PLACES</p>
+                <h2 id="favorites-heading">Favourites</h2>
+              </div>
+              <span class="favorite-count" id="favorite-count">0</span>
+            </div>
+            <p class="sidebar-intro">Keep an eye on the places you care about.</p>
+            <ul class="favorites-list" id="favorites-list"></ul>
+            <div class="sidebar-footnote">
+              <span aria-hidden="true">✦</span>
+              <span>Weather makes every day a little more yours.</span>
+            </div>
+          </section>
+          <p class="data-note">Weather data is for demonstration purposes.</p>
+        </aside>
+      </main>
+    </div>
+  </body>
+</html>
