@@ -22,8 +22,6 @@ export function renderCurrentWeather(weather) {
   document.querySelector("#current-condition").textContent = weather.condition;
   document.querySelector("#current-temperature").innerHTML =
     `${weather.temperature}<span>°</span>`;
-  document.querySelector("#feels-like").textContent =
-    `Feels like ${weather.feelsLike}°`;
   document.querySelector("#current-icon").textContent = weather.icon;
   document.querySelector("#wind-speed").textContent = `${weather.wind} km/h`;
   document.querySelector("#humidity").textContent = `${weather.humidity}%`;
@@ -49,11 +47,20 @@ export function renderForecast(forecast) {
   forecast.forEach((day, index) => {
     const card = document.createElement("article");
     card.className = "forecast-card";
-    card.setAttribute("aria-label", `${getForecastDay(index)}: ${day.high}° high, ${day.low}° low`);
+    const dayLabel = day.date
+      ? new Intl.DateTimeFormat(undefined, { weekday: "short" }).format(
+          new Date(`${day.date}T12:00:00`),
+        )
+      : getForecastDay(index);
+    const accessibleDay = index === 0 ? `Today, ${dayLabel}` : dayLabel;
+    card.setAttribute(
+      "aria-label",
+      `${accessibleDay}: ${day.high}° high, ${day.low}° low`,
+    );
 
-    const dayLabel = document.createElement("span");
-    dayLabel.className = "forecast-day";
-    dayLabel.textContent = getForecastDay(index);
+    const dayElement = document.createElement("span");
+    dayElement.className = "forecast-day";
+    dayElement.textContent = index === 0 ? "Today" : dayLabel;
 
     const icon = document.createElement("span");
     icon.className = "forecast-icon";
@@ -70,7 +77,7 @@ export function renderForecast(forecast) {
     low.textContent = `${day.low}°`;
     temperatures.append(high, low);
 
-    card.append(dayLabel, icon, temperatures);
+    card.append(dayElement, icon, temperatures);
     if (day.rain) {
       const rain = document.createElement("span");
       rain.className = "forecast-rain";

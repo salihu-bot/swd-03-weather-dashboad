@@ -88,7 +88,7 @@
                   />
                   <circle cx="12" cy="10" r="2.2" />
                 </svg>
-                <span id="current-location">Seattle, United States</span>
+                <span id="current-location">Loading weather…</span>
               </div>
               <button
                 class="icon-button favorite-toggle"
@@ -108,9 +108,8 @@
 
             <div class="hero-content">
               <div class="temperature-block">
-                <p class="condition-label" id="current-condition">Partly cloudy</p>
-                <div class="temperature" id="current-temperature">18<span>°</span></div>
-                <p class="feels-like" id="feels-like">Feels like 17°</p>
+                <p class="condition-label" id="current-condition">Fetching current conditions…</p>
+                  <div class="temperature" id="current-temperature">--<span>°</span></div>
               </div>
               <div class="weather-illustration" aria-hidden="true">
                 <span id="current-icon">🌤️</span>
@@ -127,7 +126,7 @@
                 </span>
                 <span class="meta-copy">
                   <span class="meta-label">WIND</span>
-                  <strong id="wind-speed">12 km/h</strong>
+                  <strong id="wind-speed">-- km/h</strong>
                 </span>
               </div>
               <div class="meta-item">
@@ -151,7 +150,7 @@
                 </span>
                 <span class="meta-copy">
                   <span class="meta-label">HUMIDITY</span>
-                  <strong id="humidity">64%</strong>
+                  <strong id="humidity">--%</strong>
                 </span>
               </div>
             </div>
@@ -185,7 +184,7 @@
               <span>Weather makes every day a little more yours.</span>
             </div>
           </section>
-          <p class="data-note">Weather data is for demonstration purposes.</p>
+          <p class="data-note">Weather data provided by Open-Meteo.</p>
         </aside>
       </main>
     </div>
