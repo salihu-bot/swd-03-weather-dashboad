@@ -50,6 +50,14 @@
 
         <div class="topbar-actions">
           <button
+            class="location-button"
+            id="location-button"
+            type="button"
+          >
+            <span aria-hidden="true">⌖</span>
+            <span>Use my location</span>
+          </button>
+          <button
             class="unit-toggle"
             id="unit-toggle"
             type="button"
@@ -92,6 +100,18 @@
 
           <section class="current-card glass-card" id="current-weather" aria-label="Current weather">
             <div class="hero-glow" aria-hidden="true"></div>
+            <div
+              class="weather-skeleton"
+              id="weather-skeleton"
+              role="status"
+              aria-label="Loading weather forecast"
+              hidden
+            >
+              <span class="skeleton-line skeleton-location"></span>
+              <span class="skeleton-line skeleton-condition"></span>
+              <span class="skeleton-line skeleton-temperature"></span>
+              <span class="skeleton-line skeleton-meta"></span>
+            </div>
             <div class="current-topline">
               <div class="location">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
@@ -121,7 +141,7 @@
             <div class="hero-content">
               <div class="temperature-block">
                 <p class="condition-label" id="current-condition">Fetching current conditions…</p>
-                  <div class="temperature" id="current-temperature">--<span>°</span></div>
+                <div class="temperature" id="current-temperature">--<span>°</span></div>
               </div>
               <div class="weather-illustration" aria-hidden="true">
                 <span id="current-icon">🌤️</span>

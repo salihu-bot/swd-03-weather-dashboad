@@ -64,6 +64,13 @@ export function hideCityChoices() {
   picker.replaceChildren();
 }
 
+export function setWeatherLoading(loading) {
+  const card = document.querySelector("#current-weather");
+  const skeleton = document.querySelector("#weather-skeleton");
+  card.classList.toggle("is-loading", loading);
+  skeleton.hidden = !loading;
+}
+
 export function renderUnitToggle(unit) {
   const toggle = document.querySelector("#unit-toggle");
   const nextUnit = unit === "C" ? "F" : "C";
@@ -165,7 +172,7 @@ export function renderFavorites(favorites, currentCity, unit, onSelect, onRemove
     const icon = document.createElement("span");
     icon.className = "favorite-weather-icon";
     icon.setAttribute("aria-hidden", "true");
-    icon.textContent = weather.icon;
+    icon.textContent = weather.icon ?? "📍";
 
     const info = document.createElement("span");
     info.className = "favorite-info";
@@ -174,12 +181,15 @@ export function renderFavorites(favorites, currentCity, unit, onSelect, onRemove
     name.textContent = [weather.name, weather.region].filter(Boolean).join(", ");
     const condition = document.createElement("span");
     condition.className = "favorite-condition";
-    condition.textContent = weather.condition;
+    condition.textContent =
+      weather.condition ?? weather.country ?? "Tap to view forecast";
     info.append(name, condition);
 
     const temperature = document.createElement("span");
     temperature.className = "favorite-temperature";
-    temperature.textContent = `${formatTemperature(weather.temperature, unit)}°`;
+    temperature.textContent = Number.isFinite(weather.temperature)
+      ? `${formatTemperature(weather.temperature, unit)}°`
+      : "—°";
     selectButton.append(icon, info, temperature);
 
     const removeButton = document.createElement("button");
@@ -194,13 +204,16 @@ export function renderFavorites(favorites, currentCity, unit, onSelect, onRemove
   });
 
   const favoriteButton = document.querySelector("#favorite-toggle");
-  const isFavorite = favorites.some(
+  const isFavorite = Boolean(currentCity) && favorites.some(
     (weather) => cityIdentity(weather) === cityIdentity(currentCity),
   );
+  favoriteButton.disabled = !currentCity;
   favoriteButton.setAttribute("aria-pressed", String(isFavorite));
   favoriteButton.setAttribute(
     "aria-label",
-    `${isFavorite ? "Remove" : "Add"} ${cityLabel(currentCity)} ${isFavorite ? "from" : "to"} favourites`,
+    currentCity
+      ? `${isFavorite ? "Remove" : "Add"} ${cityLabel(currentCity)} ${isFavorite ? "from" : "to"} favourites`
+      : "Add city to favourites",
   );
   favoriteButton.title = isFavorite ? "Remove from favourites" : "Add to favourites";
 }
