@@ -48,10 +48,22 @@
           <button type="submit">Search</button>
         </form>
 
-        <div class="topbar-note">
-          <span class="live-dot" aria-hidden="true"></span>
-          <span>Live weather</span>
+        <div class="topbar-actions">
+          <button
+            class="unit-toggle"
+            id="unit-toggle"
+            type="button"
+            aria-label="Switch to °F"
+            title="Switch to °F"
+          >
+            °C
+          </button>
+          <div class="topbar-note">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span>Live weather</span>
+          </div>
         </div>
+        <div class="city-picker" id="city-picker" hidden></div>
       </header>
 
       <main class="dashboard">

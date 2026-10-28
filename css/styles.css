@@ -59,6 +59,94 @@ button {
   border-bottom: 1px solid rgba(202, 217, 240, 0.1);
 }
 
+.topbar > .search-form {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.topbar-actions {
+  display: flex;
+  justify-self: end;
+  align-items: center;
+  gap: 15px;
+}
+
+.unit-toggle {
+  min-width: 39px;
+  padding: 7px 8px;
+  color: var(--color-accent-soft);
+  border: 1px solid rgba(246, 201, 120, 0.2);
+  border-radius: 10px;
+  background: rgba(246, 201, 120, 0.07);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.unit-toggle:hover {
+  border-color: rgba(246, 201, 120, 0.4);
+  background: rgba(246, 201, 120, 0.13);
+}
+
+.unit-toggle:focus-visible,
+.choose-city-button:focus-visible,
+.city-choice:focus-visible {
+  outline: 2px solid var(--color-accent-soft);
+  outline-offset: 3px;
+}
+
+.city-picker {
+  z-index: 1;
+  display: flex;
+  grid-column: 2;
+  grid-row: 2;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 13px;
+  background: rgba(18, 29, 47, 0.96);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2);
+}
+
+.city-picker[hidden] {
+  display: none;
+}
+
+.city-choice {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
+  color: var(--color-text);
+  border: 1px solid rgba(205, 220, 244, 0.12);
+  border-radius: 9px;
+  background: #1b2940;
+  font-size: 11px;
+}
+
+.city-choice option {
+  color: var(--color-text);
+  background: #1b2940;
+}
+
+.choose-city-button {
+  flex: 0 0 auto;
+  padding: 10px 12px;
+  color: #162033;
+  border: 0;
+  border-radius: 9px;
+  background: var(--color-accent);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.choose-city-button:hover {
+  background: var(--color-accent-soft);
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -162,7 +250,6 @@ button {
 
 .topbar-note {
   display: flex;
-  justify-self: end;
   align-items: center;
   gap: 8px;
   color: var(--color-muted);
@@ -762,14 +849,23 @@ h2 {
     padding-bottom: 20px;
   }
 
-  .search-form {
+  .topbar > .search-form {
     grid-column: 1 / -1;
     grid-row: 2;
   }
 
-  .topbar-note {
+  .city-picker {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .topbar-actions {
     grid-column: 2;
     grid-row: 1;
+    gap: 9px;
+  }
+
+  .topbar-note {
     font-size: 10px;
   }
 
